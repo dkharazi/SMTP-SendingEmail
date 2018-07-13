@@ -25,7 +25,7 @@ def get_contacts(filename):
         for row in reader:
             names.append(row[0])
             emails.append(row[1])
-        return names, emails
+    return names, emails
 
 if __name__ == '__main__':
     # Reads in file name used for body
