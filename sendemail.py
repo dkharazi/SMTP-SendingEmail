@@ -21,10 +21,11 @@ def get_contacts(filename):
     emails = []
     with open(filename) as f:
         reader = csv.reader(f)
-    for row in reader:
-        names.append(row)
-        emails.append(row)
-    return names, emails
+        next(reader, None)
+        for row in reader:
+            names.append(row[0])
+            emails.append(row[1])
+        return names, emails
 
 if __name__ == '__main__':
     # Reads in file name used for body
