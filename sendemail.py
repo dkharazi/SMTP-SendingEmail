@@ -2,16 +2,17 @@
 import smtplib
 import csv
 import sys
+from string import Template
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 # Sender email
-SENDER_ADDRESS = 'my_address@example.com'
-PASSWORD = 'mypassword'
+SENDER_ADDRESS = 'samplesender@example.com'
+PASSWORD = 'pass!'
 
 # Reads in text for an email body
 def read_template(filename):
-    with open(filename, 'r', encoding = 'utf-8') as template_file:
+    with open(filename, 'r') as template_file:
         template_file_content = template_file.read()
     return Template(template_file_content)
     
@@ -29,7 +30,7 @@ def get_contacts(filename):
 
 if __name__ == '__main__':
     # Reads in file name used for body
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         contacts = sys.argv[1]
         body = sys.argv[2]
     else:
@@ -50,7 +51,7 @@ if __name__ == '__main__':
         msg = MIMEMultipart() 
 
         # Add the name to the message template
-        message = message_template.substitute(PERSON_NAME=name.title())
+        message_mod = message.substitute(PERSON_NAME=name.title())
 
         # Setup the parameters of the message
         msg['From'] = SENDER_ADDRESS
@@ -58,10 +59,11 @@ if __name__ == '__main__':
         msg['Subject'] = "Input a test subject."
         
         # Add in the message body
-        msg.attach(MIMEText(message, 'plain'))
+        msg.attach(MIMEText(message_mod, 'plain'))
         
         # Send the message via the server set up earlier.
-        s.send_message(msg)
+        text = msg.as_string()
+        server.sendmail(SENDER_ADDRESS, email, text)
         del msg
         
     # Terminate the SMTP session and close the connection
