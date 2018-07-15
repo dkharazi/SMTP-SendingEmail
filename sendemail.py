@@ -7,8 +7,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 # Sender email
-SENDER_ADDRESS = 'samplesender@example.com'
-PASSWORD = 'pass!'
+SENDER_ADDRESS = 'samplesender@example.com' # Change sender email here
+PASSWORD = 'pass!' # Change sender password here
 
 # Reads in text for an email body
 def read_template(filename):
