@@ -6,9 +6,12 @@ from string import Template
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+# Set traceback
+sys.tracebacklimit = 0
+
 # Sender email
-SENDER_ADDRESS = 'samplesender@example.com' # Change sender email here
-PASSWORD = 'pass!' # Change sender password here
+SENDER_ADDRESS = 'samplesender@example.com'
+PASSWORD = 'pass!'
 
 # Reads in text for an email body
 def read_template(filename):
@@ -43,7 +46,12 @@ if __name__ == '__main__':
     # Connect to the mail server
     server = smtplib.SMTP(host = 'smtp.gmail.com', port = 587)
     server.starttls()
-    server.login(SENDER_ADDRESS, PASSWORD)
+    try:
+    	server.login(SENDER_ADDRESS, PASSWORD)
+    except smtplib.SMTPAuthenticationError as e:
+    	server.quit()
+    	print("\nEither ensure your email and password are entered correctly, or change the security settings on your sender email.\n")
+    	raise Exception(e)
 
     # For each contact, send the email:
     for name, email in zip(names, emails):
