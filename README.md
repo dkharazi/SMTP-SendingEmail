@@ -4,5 +4,10 @@ Frequently, we'll have the names and email addresses of some people that need to
 
 ## Requirements
 
-1. Include the text files in the same directory as the python file.
-2. Run the python file using the command line, while including the "body.txt" file as the first argument and the "contacts.csv" file as the second argument.
+1. The code was written in Python 2.7, so make sure you run the code with the same Python distribution.
+2. Include the text files in the same directory as the Python script.
+3. Run the python file using the command line, while including the "contacts.csv" file as the first argument and the "body.txt" file as the second argument.
+4. Change the "body.txt" file to your preferred email body, and include your preferred contacts in the "contacts.csv" file.
+5. Ensure that you follow the typical formatting rules when making adjustments to the "body.txt" and "contacts.csv" files.
+6. Insert your sender email and password into the lines that have been marked for you in the code.
+7. Either ensure that the sender email is from gmail, or modify the SMTP host on line 48.
